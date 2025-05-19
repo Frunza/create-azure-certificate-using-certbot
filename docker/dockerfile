@@ -1,0 +1,9 @@
+FROM python:3.13-alpine
+
+RUN apk add --no-cache bash curl gcc musl-dev libffi-dev openssl-dev make linux-headers
+RUN pip install certbot certbot-dns-azure
+
+RUN mkdir -p /certbot/logs /certbot/config /certbot/work
+
+ADD ./scripts /app
+WORKDIR /app

@@ -1,0 +1,14 @@
+services:
+  main:
+    image: azure-container-cermanager
+    network_mode: host
+    volumes:
+      - ./certbot:/certbot
+    working_dir: /app
+    environment:
+      - ARM_CLIENT_ID=${ARM_CLIENT_ID}
+      - ARM_CLIENT_SECRET=${ARM_CLIENT_SECRET}
+      - ARM_TENANT_ID=${ARM_TENANT_ID}
+      - ARM_SUBSCRIPTION_ID=${ARM_SUBSCRIPTION_ID}
+    entrypoint: ["sh", "-c"]
+    command: ["sh run.sh"]
