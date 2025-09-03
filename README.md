@@ -29,7 +29,12 @@ The container needs to have `certbot` and its `Azure DNS` plugin installed. This
 FROM python:3.13-alpine
 
 RUN apk add --no-cache bash curl gcc musl-dev libffi-dev openssl-dev make linux-headers
-RUN pip install certbot certbot-dns-azure
+
+# Pin certbot + azure deps to versions compatible with the plugin
+# azure-mgmt-dns must be pinned to a specific version due to a bug https://github.com/certbot/certbot/issues/10367
+RUN pip install --no-cache-dir certbot==3.1.0 \
+                               certbot-dns-azure==2.6.1 \
+                               azure-mgmt-dns==8.2.0
 
 RUN mkdir -p /certbot/logs /certbot/config /certbot/work
 
