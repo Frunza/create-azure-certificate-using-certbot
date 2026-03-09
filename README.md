@@ -8,11 +8,10 @@ If you have some `DNS` configuration in `Azure`, there might come times when you
 
 A Linux or MacOS machine for local development. If you are running Windows, you first need to set up the *Windows Subsystem for Linux (WSL)* environment.
 
-You need `docker cli` and `docker-compose` on your machine for testing purposes, and/or on the machines that run your pipeline.
-You can check both of these by running the following commands:
+You need `docker cli` on your machine for testing purposes, and/or on the machines that run your pipeline.
+You can these by running the following command:
 ```sh
 docker --version
-docker-compose --version
 ```
 
 For `Azure` access you need the following:
@@ -41,7 +40,7 @@ RUN mkdir -p /certbot/logs /certbot/config /certbot/work
 COPY ./scripts /app
 WORKDIR /app
 ```
-To access `Azure`, `certbot` needs some configuration. Let's write the `docker-compose` to pass the required environment variables and configure the volume mount:
+To access `Azure`, `certbot` needs some configuration. Let's write the `docker compose` to pass the required environment variables and configure the volume mount:
 ```sh
 services:
   main:
@@ -58,7 +57,7 @@ services:
     entrypoint: ["sh", "-c"]
     command: ["sh run.sh"]
 ```
-The script running inside `docker-compose` must first of all take care of the `certbot` configuration and afterwards run the correct command to create the certificate:
+The script running inside `docker compose` must first of all take care of the `certbot` configuration and afterwards run the correct command to create the certificate:
 ```sh
 #!/bin/sh
 
