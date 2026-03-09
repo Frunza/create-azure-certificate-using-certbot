@@ -38,7 +38,7 @@ RUN pip install --no-cache-dir certbot==3.1.0 \
 
 RUN mkdir -p /certbot/logs /certbot/config /certbot/work
 
-ADD ./scripts /app
+COPY ./scripts /app
 WORKDIR /app
 ```
 To access `Azure`, `certbot` needs some configuration. Let's write the `docker-compose` to pass the required environment variables and configure the volume mount:
